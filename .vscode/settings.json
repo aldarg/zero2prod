@@ -1,0 +1,11 @@
+{
+  "editor.semanticTokenColorCustomizations": {
+    "[GitHub Dark Default]": {
+      "rules": {
+        "*.mutable": {
+          "fontStyle": "italic"
+        }
+      }
+    }
+  }
+}
