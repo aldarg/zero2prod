@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  api:
+    init: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/newsletter
+      WAIT_HOSTS: postgres:5432
+      WAIT_HOSTS_TIMEOUT: 120
+      APP__APPLICATION__HOST: 0.0.0.0
+    command: >
+      sh -c "/wait &&
+      sqlx database create &&
+      sqlx migrate run &&
+      /app/target/release/zero2prod"
+
+  postgres:
+    init: true
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
