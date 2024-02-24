@@ -4,7 +4,6 @@ on: [push, pull_request]
 
 env:
   CARGO_TERM_COLOR: always
-  DATABASE_URL: postgres://postgres:password@localhost:5432/newsletter
 
 jobs:
   test:
@@ -35,6 +34,8 @@ jobs:
         run: sqlx database create && sqlx migrate run
       - name: Run tests
         run: cargo test
+    env:
+      DATABASE_URL: postgres://postgres:password@localhost:5432/newsletter
 
   fmt:
     name: Rustfmt
@@ -89,4 +90,5 @@ jobs:
         run: sqlx database create && sqlx migrate run
       - name: Generate code coverage
         run: cargo tarpaulin --verbose --workspace
-      
+    env:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/newsletter
