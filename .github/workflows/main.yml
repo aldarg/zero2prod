@@ -92,4 +92,3 @@ jobs:
         run: cargo tarpaulin --verbose --workspace
     env:
       DATABASE_URL: postgres://postgres:password@postgres:5432/newsletter
-      APP_ENVIRONMENT: dockerized
