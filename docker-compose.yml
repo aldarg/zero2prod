@@ -16,6 +16,7 @@ services:
       WAIT_HOSTS: postgres:5432
       WAIT_HOSTS_TIMEOUT: 120
       APP__APPLICATION__HOST: 0.0.0.0
+      APP__DATABASE__HOST: postgres
     command: >
       sh -c "/wait &&
       sqlx database create &&
