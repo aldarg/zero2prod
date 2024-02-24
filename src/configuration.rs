@@ -92,12 +92,14 @@ impl EmailClientSettings {
 pub enum Environment {
     Local,
     Production,
+    Dockerized,
 }
 impl Environment {
     pub fn as_str(&self) -> &'static str {
         match self {
             Environment::Local => "local",
             Environment::Production => "production",
+            Environment::Dockerized => "dockerized",
         }
     }
 }
@@ -107,8 +109,9 @@ impl TryFrom<String> for Environment {
         match s.to_lowercase().as_str() {
             "local" => Ok(Self::Local),
             "production" => Ok(Self::Production),
+            "dockerized" => Ok(Self::Dockerized),
             other => Err(format!(
-                "{} is not a supported environment. Use either `local` or `production`.",
+                "{} is not a supported environment. Use either `local`, `production` or `dockerized`",
                 other
             )),
         }
