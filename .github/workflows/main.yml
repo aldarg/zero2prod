@@ -92,4 +92,4 @@ jobs:
         run: cargo tarpaulin --verbose --workspace
     env:
       DATABASE_URL: postgres://postgres:password@postgres:5432/newsletter
-      APP__DATABASE__HOST: postgres
+      APP_DATABASE__HOST: postgres
